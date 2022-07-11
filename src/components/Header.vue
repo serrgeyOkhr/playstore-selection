@@ -1,20 +1,19 @@
 <template>
-  <!-- <div class="q-pa-md"> -->
-    <q-layout view="hHh lpr lff" container style="height: 100vh" class="shadow-2 rounded-borders">
+  <div class="q-pa-md">
+    <q-layout view="hHh Lpr lff" container style="height: 300px" class="shadow-2 rounded-borders">
       <q-header elevated class="bg-black">
         <q-toolbar>
           <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
-          <q-toolbar-title>Игры выгодно!</q-toolbar-title>
+          <q-toolbar-title>Header</q-toolbar-title>
         </q-toolbar>
       </q-header>
 
       <q-drawer
         v-model="drawer"
+        show-if-above
         :width="200"
         :breakpoint="500"
-        show-if-above
         bordered
-        overlay
         class="bg-grey-3"
       >
         <q-scroll-area class="fit">
@@ -38,17 +37,17 @@
 
       <q-page-container>
         <q-page padding>
-          <BodyVue></BodyVue>
+          <p v-for="n in 15" :key="n">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit nihil praesentium molestias a adipisci, dolore vitae odit, quidem consequatur optio voluptates asperiores pariatur eos numquam rerum delectus commodi perferendis voluptate?
+          </p>
         </q-page>
       </q-page-container>
     </q-layout>
-  <!-- </div> -->
+  </div>
 </template>
 
 <script>
-import HeaderVue from './components/Header.vue'
-import BodyVue from './components/Body.vue'
-import { ref } from '@vue/reactivity'
+import { ref } from 'vue'
 
 const menuList = [
   {
@@ -89,20 +88,16 @@ const menuList = [
   }
 ]
 
-
-
 export default {
-  name: 'store-app',
-  components:{
-    HeaderVue,
-    BodyVue
-  },
   setup () {
-    const drawer = ref(false)
     return {
-      drawer,
+      drawer: ref(false),
       menuList
     }
   }
 }
 </script>
+
+<style scoped>
+
+</style>
