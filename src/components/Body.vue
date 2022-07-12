@@ -1,7 +1,22 @@
 <template>
   <div class="q-pa-md row justify-center stretch q-gutter-md">
-    <div class="card_wrapper" v-for="(item,index) in 15" :key="index">
-      <ItemCard />
+      <div class="q-pa-lg flex flex-center">
+        <q-pagination
+          v-model="currentPage"
+          @click="getGames()"
+          :max="maxPages"
+          :max-pages="9"
+          direction-links
+        />
+        <pre>{{currentPage}}</pre>
+      </div>
+    <div class="card_wrapper" v-for="(game, index) in showGames"
+    :key="index">
+      <ItemCard
+      :gameInfo="game"
+      :shopInfo="stores.filter((shop) => {return shop.storeID === game.storeID})[0]"
+      />
+      <!-- <pre>{{game}}</pre> -->
     </div>
 
   </div>
@@ -17,8 +32,9 @@ export default{
   },
   setup() {
     const showGames = ref([])
-    const createURL = new config.API_Fabric()
-    const api_params = {}
+    const stores = ref([])
+    const maxPages = ref(0)
+    const currentPage = ref(1)
     const type = {
       List_of_Deals: 'deals?',
       Deal_Lookup: 'deals?',
@@ -28,27 +44,37 @@ export default{
       Stores_Info: 'stores',
     }
 
-    function getAllGames(page = 0) {
-      api_params.pageNumber = page
+    function getAllGames(output, maxPages, page ) {
+      const createURL = new config.API_Fabric()
+      const api_params = {}
+      api_params.pageNumber = page.value
       // console.log('!!! ', api_params);
       fetch (createURL.getURL(type.List_of_Deals, api_params), {
         method: 'GET',
         redirect: 'follow'
       })
-      .then(response => response.json())
-      .then(result => console.log(result))
+      .then((response) => { maxPages.value = Number(response.headers.get('X-Total-Page-Count')); return response.json()})
+      .then((result) => {
+        console.log(result);
+        output.value = result
+        })
     }
-    function getStores() {
-      // api_params.pageNumber = page
-      // console.log('!!! ', api_params);
+    function getStores(output) {
+      const createURL = new config.API_Fabric()
+
       fetch (createURL.getURL(type.Stores_Info), {
         method: 'GET',
         redirect: 'follow'
       })
       .then(response => response.json())
-      .then(result => console.log('stores', result))
+      .then((result) => {
+        console.log('stores', result)
+        output.value = result
+        })
     }
     function getDetailGameInfo(id) {
+      const createURL = new config.API_Fabric()
+      const api_params = {}
       api_params.id = id
       // console.log('!!! ', api_params);
       fetch (createURL.getURL(type.Deal_Lookup, api_params), {
@@ -58,11 +84,19 @@ export default{
       .then(response => response.json())
       .then(result => console.log('DetailGameInfo', result))
     }
-    getAllGames(1)
-    getStores()
+    getAllGames(showGames, maxPages, currentPage)
+    getStores(stores)
     getDetailGameInfo('RdTbnfxjbPgSZJ%2Fi%2BibOa9cwLng0aGCcKUws2MdngN4%3D')
     // createURL.getURL(type.Deal_Lookup, api_params)
+    function getGames() {
+      getAllGames(showGames, maxPages, currentPage)
+    }
     return {
+      showGames,
+      stores,
+      maxPages,
+      currentPage,
+      getGames
     }
   }
 }
