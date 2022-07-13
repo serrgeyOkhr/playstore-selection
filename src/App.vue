@@ -12,7 +12,7 @@
         v-model="drawer"
         :width="200"
         :breakpoint="500"
-        show-if-above
+        
         bordered
         overlay
         class="bg-grey-3"
