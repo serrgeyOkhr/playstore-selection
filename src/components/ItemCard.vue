@@ -2,6 +2,8 @@
   <div class="q-pa-md row items-start q-gutter-md">
     <q-card class="my-card" flat bordered>
       <q-img
+        fit="contain"
+        height="120px"
         :src="game.thumb"
       />
 
@@ -14,7 +16,7 @@
             <span>В магазине {{shop.storeName}}</span>
           </div>
           <div class="storeImgContainer">
-            <img :src="'https://www.cheapshark.com/'+shop.images.logo" alt=""/>
+            <q-img :src="'https://www.cheapshark.com/'+shop.images.logo" alt=""/>
           </div> 
         </div>
         <!-- <div class="raiting">
@@ -93,10 +95,12 @@ text-decoration: line-through;
 }
 .storeImgContainer{
   width: 20%;
+  max-height: 60px;
+  overflow: hidden;
 }
 img{
   width: 100%;
-  height: 100%;
+  max-height: 100%;
   object-fit: contain;
 }
 .descriptionContainer {
