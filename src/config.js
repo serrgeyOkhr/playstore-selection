@@ -24,7 +24,7 @@ class API_Fabric {
     params.limit ? this.limit = params.limit : this.limit = undefined
   }
   // Getters
-  getURL(type, params) {
+  createURL(type, params) {
     params ? this.setParams(params) : null
     const API = this.getAPI()
     return this.API_URL + type + API
