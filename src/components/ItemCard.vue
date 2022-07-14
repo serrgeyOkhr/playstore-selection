@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md row items-start q-gutter-md">
+  <div class="q-pa-md row items-start q-gutter-md card" >
     <q-card class="my-card" flat bordered>
       <q-img
         fit="contain"
@@ -90,6 +90,12 @@ import { toNumber } from '@vue/shared'
 </script>
 
 <style scoped>
+.card{
+  min-width: 100%;
+}
+.my-card{
+  width: 100%;
+}
 .normalPrice {
 text-decoration: line-through;
 }
