@@ -12,7 +12,7 @@
         <div class="text-h5 q-mt-sm q-mb-xs">{{game.title}}</div>
         <div class="descriptionContainer text-caption q-mb-md">
           <div>
-            <span v-if="game.isOnSale" class="text-red-5"> Распродажа! </span>
+            <span v-if="game.isOnSale === '1'" class="text-red-5"> Распродажа! </span><br>
             <span>В магазине {{shop.storeName}}</span>
           </div>
           <div class="storeImgContainer">
@@ -29,7 +29,7 @@
         </div> -->
         <div class="price">
           Цена:
-          <span class="normalPrice q-mr-sm">{{game.normalPrice}}$</span>
+          <span v-if="game.isOnSale === '1'" class="normalPrice q-mr-sm">{{game.normalPrice}}$</span>
           <span class="salePrice text-h5 text-red-7">{{game.salePrice}}$</span>
         </div>
       </q-card-section>
