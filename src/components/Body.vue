@@ -89,12 +89,22 @@
       </div>
     </div>
     <div class="spinner">
-      <div class="card_container">
+      <!-- <div class="card_container">
         <div class="card_wrapper" v-for="(game, index) in showGames"
           :key="index">
             <ItemCard
             :gameInfo="game"
             :shopInfo="stores.filter((shop) => {return shop.storeID === game.storeID})[0]"
+            />
+          </div>
+        </div> -->
+      <div class="card_container">
+        <div class="card_wrapper" v-for="(game, index) in showGroups"
+          :key="index">
+            <ItemCard
+              :showByGroup="true"
+              :gameInfo="game"
+              :shopInfo="stores"
             />
             <!-- <pre>{{game}}</pre> -->
           </div>
@@ -133,7 +143,7 @@ export default{
       },
       steamRating: 65,
       metacriticRating: 65,
-      sortBy: 'Deal Rating'
+      sortBy: {label: 'Title', value: 'Title'}
 
     })
     const sortByOptions = [
@@ -148,6 +158,7 @@ export default{
             ]
     const isShowShopSelect =ref(false)
     const showGames = ref([])
+    const showGroups = ref([])
     const stores = ref([])
     const maxPages = ref(0)
     const currentPage = ref(1)
@@ -238,8 +249,27 @@ export default{
         })
       .then((result) => {
         console.log(result);
+        groupResults(result)
         output.value = result
         })
+    }
+
+    function groupResults(listOfGames){
+      console.log('list: ', listOfGames);
+      let newGamesObject = {}
+      // {
+      //   title: [{},{}]
+      // }
+      for (let index = 0; index < listOfGames.length; index++) {
+        const element = listOfGames[index];
+        if(newGamesObject.hasOwnProperty(element.title)){
+          newGamesObject[element.title].push(element)
+        } else {
+          newGamesObject[element.title] = [element]
+        }
+      }
+      // console.log('Is ready?', newGamesObject);
+      showGroups.value = newGamesObject
     }
     // function changeValue() {
     //   console.log('showFromShop', showFromShop.value);
@@ -256,6 +286,7 @@ export default{
       searchSettings,
       showFromShop,
       isShowShopSelect,
+      showGroups,
       sortByOptions,
       searchGames,
       // changeValue
