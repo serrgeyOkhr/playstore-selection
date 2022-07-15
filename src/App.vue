@@ -106,3 +106,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.border {
+  border: 1px solid;
+}
+</style>
