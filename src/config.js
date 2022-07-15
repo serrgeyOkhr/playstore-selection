@@ -3,29 +3,31 @@ class API_Fabric {
   API_URL = 'https://www.cheapshark.com/api/1.0/'
   setParams(params) {
     console.log(params);
-    params.storeID ? this.storeID = params.storeID : this.storeID = undefined
-    params.pageNumber ? this.pageNumber = params.pageNumber : this.pageNumber = undefined
-    params.pageSize ? this.pageSize = params.pageSize : this.pageSize =undefined
-    params.sortBy ? this.sortBy = params.sortBy : this.sortBy = undefined
-    params.desc ? this.desc = params.desc : this.desc = undefined
-    params.lowerPrice ? this.lowerPrice = params.lowerPrice : this.lowerPrice = undefined
-    params.upperPrice ? this.upperPrice = params.upperPrice : this.upperPrice = undefined
-    params.metacritic ? this.metacritic = params.metacritic : this.metacritic = undefined
-    params.steamRating ? this.steamRating = params.steamRating : this.steamRating = undefined
-    params.steamAppID ? this.steamAppID = params.steamAppID : this.steamAppID = undefined
-    params.title ? this.title = params.title : this.title = undefined
-    params.exact ? this.exact = params.exact : this.exact = undefined
-    params.AAA ? this.AAA = params.AAA : this.AAA =  undefined
-    params.steamworks ? this.steamworks = params.steamworks : this.steamworks =  undefined
-    params.onSale ? this.onSale = params.onSale : this.onSale = undefined
-    params.output  ? this.output = params.output : this.output = undefined
-    params.id ? this.id = params.id : this.id = undefined
-    params.ids ? this.ids = params.ids : this.ids = undefined
-    params.limit ? this.limit = params.limit : this.limit = undefined
+    // params.storeID    ? this.storeID = params.storeID       : this.storeID = undefined
+    this.storeID = params.storeID
+    this.pageSize = params.pageSize
+    this.pageNumber = params.pageNumber
+    this.sortBy = params.sortBy
+    this.desc = params.desc
+    this.lowerPrice = params.lowerPrice
+    this.upperPrice = params.upperPrice
+    this.metacritic = params.metacritic
+    this.steamRating = params.steamRating 
+    this.steamAppID = params.steamAppID
+    this.title = params.title
+    this.exact = params.exact
+    this.AAA = params.AAA
+    this.steamworks = params.steamworks
+    this.onSale = params.onSale
+    this.output = params.output 
+    this.id = params.id
+    this.ids = params.ids 
+    this.limit = params.limit
   }
   // Getters
   createURL(type, params) {
     params ? this.setParams(params) : null
+    // this.setParams(params)
     const API = this.getAPI()
     return this.API_URL + type + API
 
@@ -52,13 +54,15 @@ class API_Fabric {
     this.id ? str += 'id='+String(this.id)+'&' : null
     this.ids ? str += 'ids='+String(this.ids)+'&' : null
     this.limit ? str += 'limit='+String(this.limit)+'&' : null
-    console.log(str);
-    console.log(str.lastIndexOf('&'))
-    console.log(str.length);
-    if (str.lastIndexOf('&') === str.length-1) {
+    if (str.length > 0) {
       str = str.slice(0, str.length-1)
-      console.log('HERE', str);
     }
+    console.log('RequestParams', str);
+    // console.log(str);
+    // console.log(str.lastIndexOf('&'))
+    // console.log(str.length);
+    // if (str.lastIndexOf('&') === str.length-1) {
+    // }
     return str
   }
   // Methods

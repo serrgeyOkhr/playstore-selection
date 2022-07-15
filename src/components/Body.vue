@@ -136,7 +136,7 @@ export default{
 
     })
     const sortByOptions = [
-              {label: 'Default', value: 'Deal Rating'},
+              {label: 'Deal Rating', value: 'Deal Rating'},
               {label: 'Title', value: 'Title'},
               {label: 'Savings', value: 'Savings'},
               {label: 'Price', value: 'Price'},
@@ -160,18 +160,11 @@ export default{
       Stores_Info: 'stores',
     }
 
-    function getAllGames(output, maxPages, page ) {
-      const URLFabric = new config.API_Fabric()
-      const api_params = {
-        pageNumber: page.value
-      }
-      const fetch_options = {
-        method: 'GET',
-        redirect: 'follow'
-      }
-      const fetch_url = URLFabric.createURL(API_Section.List_of_Deals, api_params)
-      // console.log('!!! ', api_params);
-      sendOnServerGetPages(fetch_url, fetch_options, output, maxPages)
+    searchGames()
+    getStores(stores)
+
+    function searchGames() {
+      searchWithParams(showGames, maxPages, currentPage)
     }
 
 
@@ -203,13 +196,14 @@ export default{
         method: 'GET',
         redirect: 'follow'
       }
+      
       sendOnServer(fetch_url, fetch_options, output)
     }
 
     function getDetailGameInfo(id) {
       const URLFabric = new config.API_Fabric()
       const api_params = {
-        id: id
+        id
       }
       const fetch_url = URLFabric.createURL(API_Section.Deal_Lookup, api_params)
       const fetch_options = {
@@ -219,10 +213,10 @@ export default{
 
       sendOnServer(fetch_url, fetch_options)
     }
-    searchGames()
+    // searchGames()
     // getAllGames(showGames, maxPages, currentPage)
-    getStores(stores)
-    getDetailGameInfo('RdTbnfxjbPgSZJ%2Fi%2BibOa9cwLng0aGCcKUws2MdngN4%3D')
+    // getStores(stores)
+    // getDetailGameInfo('RdTbnfxjbPgSZJ%2Fi%2BibOa9cwLng0aGCcKUws2MdngN4%3D')
     // createURL.getURL(API_Section.Deal_Lookup, api_params)
 
     function sendOnServer(url, params, output=ref('')) {
@@ -246,19 +240,12 @@ export default{
         output.value = result
         })
     }
-
-    function getGames() {
-      getAllGames(showGames, maxPages, currentPage)
-    }
-    function searchGames() {
-      searchWithParams(showGames, maxPages, currentPage)
-    }
-    function changeValue() {
-      console.log('showFromShop', showFromShop.value);
-      console.log('showFromShop toString = ', showFromShop.value.toString());
+    // function changeValue() {
+    //   console.log('showFromShop', showFromShop.value);
+    //   console.log('showFromShop toString = ', showFromShop.value.toString());
 
 
-    }
+    // }
 
     return {
       showGames,
@@ -269,9 +256,8 @@ export default{
       showFromShop,
       isShowShopSelect,
       sortByOptions,
-      getGames,
       searchGames,
-      changeValue
+      // changeValue
     }
   }
 }
