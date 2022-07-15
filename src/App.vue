@@ -111,4 +111,7 @@ export default {
 .border {
   border: 1px solid;
 }
+.q-dialog__inner{
+  overflow: auto;
+}
 </style>
