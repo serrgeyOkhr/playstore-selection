@@ -79,6 +79,7 @@
         <div class="sortBy">
           Sort by: 
           <q-select
+            class="q-ml-sm"
             v-model="searchSettings.sortBy"
             @update:model-value="searchGames()"
             toggle-color="primary"
@@ -196,7 +197,7 @@ export default{
         method: 'GET',
         redirect: 'follow'
       }
-      
+
       sendOnServer(fetch_url, fetch_options, output)
     }
 
