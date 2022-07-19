@@ -1,38 +1,10 @@
 <template>
-  <!-- <div class="q-pa-md row items-start q-gutter-md card" v-if="!showByGroup">
-    <q-card class="my-card" flat bordered>
-      <q-img
-        fit="contain"
-        height="120px"
-        :src="game.thumb"
-      />
-
-      <q-card-section>
-        <div class="text-overline text-orange-9">Overline</div>
-        <div class="text-h5 q-mt-sm q-mb-xs">{{game.title}}</div>
-        <div class="descriptionContainer text-caption q-mb-md">
-          <div>
-            <span v-if="game.isOnSale === '1'" class="text-red-5"> Распродажа! </span><br>
-            <span>В магазине {{shop.storeName}}</span>
-          </div>
-          <div class="storeImgContainer">
-            <q-img :src="'https://www.cheapshark.com/'+shop.images.logo" alt=""/>
-          </div> 
-        </div>
-        <div class="price">
-          Цена:
-          <span v-if="game.isOnSale === '1'" class="normalPrice q-mr-sm">{{game.normalPrice}}$</span>
-          <span class="salePrice text-h5 text-red-7">{{game.salePrice}}$</span>
-        </div>
-      </q-card-section>
-    </q-card>
-  </div> -->
   <div class="q-pa-md row items-start q-gutter-md card">
     <q-card
     class="my-card"
     flat
     bordered
-    > <!-- v-for="(game,index) in games" :key="index"-->
+    >
       <q-img
         fit="contain"
         height="120px"
@@ -74,6 +46,7 @@
         </div>
       </q-card-section>
     </q-card>
+
     <q-dialog v-model="card" class="overflow-auto">
       <q-card class="my-card q-ma-md" v-for="(game,index) in games" :key="index">
         <q-img
@@ -88,11 +61,11 @@
         <div class="descriptionContainer text-caption q-mb-md">
           <div>
             <span v-if="game.isOnSale === '1'" class="text-red-5"> Распродажа! </span><br>
-            <span>В магазине {{shops.filter((shop) => { return game.storeID === shop.storeID })[0]?.storeName}}</span>
+            <span>В магазине {{shops.filter((shop) => game.storeID === shop.storeID)[0]?.storeName}}</span>
           </div>
           <div class="storeImgContainer">
             <q-img
-              :src="'https://www.cheapshark.com/'+shops.filter((shop) => { return game.storeID === shop.storeID })[0]?.images.logo"
+              :src="'https://www.cheapshark.com/'+shops.filter((shop) => game.storeID === shop.storeID )[0]?.images.logo"
               alt=""
             />
           </div> 
