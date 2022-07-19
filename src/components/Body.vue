@@ -1,72 +1,7 @@
 <template>
   <div class="q-pa-md justify-center stretch q-gutter-md">
-    <div> Main Title</div>
-    <div  class="control_panel">
-      <div class="selectorWithParams">
-        <div class="sliders_container">
-          <div class="range_container">
-            <span>Select Price</span>
-            <q-range
-              v-model="searchSettings.priceRange"
-              :min="0"
-              :max="50"
-              :step="0.5"
-              label
-            />
-          </div>
-          <div class="range_container">
-            <span>Select min Steam rating</span>
-            <q-slider
-              v-model="searchSettings.steamRating"
-              :min="0"
-              :max="100"
-              :step="0.5"
-              label
-            />
-          </div>
-          <div class="range_container">
-            <span>Select min Metacritic rating</span>
-            <q-slider
-              v-model="searchSettings.metacriticRating"
-              :min="0"
-              :max="100"
-              :step="0.5"
-              label
-            />
-          </div>
-        </div>
-        <q-checkbox left-label v-model="searchSettings.onSale" label="On Sale" />
-        <q-btn @click="searchGames()">Find!</q-btn>
-      </div>
-      <div class="shopSelector">
-        <q-checkbox left-label v-model="isShowShopSelect" label="Choose shop for select" />
-        <div class="shop_container" v-if="isShowShopSelect">
-          <div class="shop_item border rounded-borders q-ma-xs" v-for="(store, index) in stores" :key="index">
-          <q-item tag="label" v-ripple>
-            <q-item-section  side center>
-              <q-checkbox v-model="showFromShop" :val="index+1" />
-            </q-item-section>
-            <q-item-section>
-              <q-img
-              class="q-mb-xs"
-              :src="'https://www.cheapshark.com/'+store.images.logo"
-              fit="contain"
-              width="60%"
-              />
-              <q-item-label>{{ store.storeName }}</q-item-label>
-              <q-item-label caption>
-                Show games from this store?
-              </q-item-label>
-            </q-item-section>
-          </q-item>
-            <div>
-              
-              </div>
-          </div>
-        </div>
-              <!-- <q-btn @click="searchGames()">Apply</q-btn> -->
-      </div>
-    </div>
+    <div class="text-h2 text-center"> Выгодные предложения из всех магазинов!</div>
+
     <div class="pagination">
       <div class="q-pa-lg flex flex-center">
         <q-pagination
@@ -127,42 +62,38 @@
 </template>
 
 <script>
-import { ref } from '@vue/reactivity'
+import { ref, toRef } from '@vue/reactivity'
 import ItemCard from './ItemCard.vue'
 import config from '../config'
 export default{
   components: {
     ItemCard
   },
-  setup() {
-    const searchSettings = ref({
-      onSale: false,
-      priceRange: {
-        min: 0,
-        max: 50
-      },
-      steamRating: 65,
-      metacriticRating: 65,
-      sortBy: {label: 'Title', value: 'Title'}
-
-    })
+  props: {
+    passSearchSettings: {
+      type: Object
+    },
+    passStores: {
+      type: Array
+    }
+  },
+  setup(props) {
     const sortByOptions = [
               {label: 'Deal Rating', value: 'Deal Rating'},
               {label: 'Title', value: 'Title'},
               {label: 'Savings', value: 'Savings'},
               {label: 'Price', value: 'Price'},
               {label: 'Metacritic', value: 'Metacritic'},
-              {label: 'Reviews', value: 'Reviews'},
+              {label: 'Steam Rating', value: 'Reviews'},
               {label: 'Release', value: 'Release'},
               {label: 'Store', value: 'Store'},
             ]
-    const isShowShopSelect =ref(false)
+    const searchSettings = toRef(props, 'passSearchSettings')
+    const stores = toRef(props, 'passStores')
     const showGames = ref([])
     const showGroups = ref([])
-    const stores = ref([])
     const maxPages = ref(0)
     const currentPage = ref(1)
-    const showFromShop = ref([])
     const API_Section = {
       List_of_Deals: 'deals?',
       Deal_Lookup: 'deals?',
@@ -190,7 +121,7 @@ export default{
         metacritic: searchSettings.value.metacriticRating,
         steamRating: searchSettings.value.steamRating,
         sortBy: searchSettings.value.sortBy.value,
-        storeID: (showFromShop.value.length > 0) ? showFromShop.value.toString() : undefined
+        storeID: (searchSettings.value.showFromShop.length > 0) ? searchSettings.value.showFromShop.toString() : undefined
       }
       const fetch_options = {
         method: 'GET',
@@ -284,8 +215,6 @@ export default{
       maxPages,
       currentPage,
       searchSettings,
-      showFromShop,
-      isShowShopSelect,
       showGroups,
       sortByOptions,
       searchGames,
@@ -299,13 +228,6 @@ export default{
 .card_wrapper{
   width: 20%;
 }
-.sliders_container{
-  display: flex;
-}
-.range_container{
-  width: 30%;
-  margin-left: 20px;
-}
 .card_container {
   width: 100%;
   display: flex;
@@ -314,14 +236,6 @@ export default{
 .preloader {
   display: flex;
   /* position: absolute */
-}
-.shop_container{
-  display: flex;
-  flex-wrap: wrap;
-}
-.shop_item{
-  display: flex;
-  width: 12%;
 }
 .sortBy{
   display: flex;
