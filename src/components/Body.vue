@@ -1,16 +1,29 @@
 <template>
   <div class="q-pa-md justify-center stretch q-gutter-md">
-    <div class="text-h2 text-center"> Выгодные предложения из всех магазинов!</div>
+    <div class="text-h2 text-center gt-sm"> Выгодные предложения из всех магазинов!</div>
+    <div class="text-h3 text-center lt-md"> Выгодные предложения из всех магазинов!</div>
 
     <div class="pagination">
       <div class="q-pa-lg flex flex-center">
-        <q-pagination
-          v-model="currentPage"
-          @click="searchGames()"
-          :max="maxPages"
-          :max-pages="9"
-          direction-links
-        />
+        <div>
+          <q-pagination
+            class="gt-xs"
+            v-model="currentPage"
+            @click="searchGames()"
+            :max="maxPages"
+            :max-pages="9"
+            direction-links
+          />
+          <q-pagination
+            class="xs q-mr-sm"
+            v-model="currentPage"
+            @click="searchGames()"
+            :max="maxPages"
+            :max-pages="5"
+            :boundary-numbers="true"
+            :ellipses="false"
+          />
+        </div>
         <div class="sortBy">
           Sort by: 
           <q-select
@@ -48,12 +61,22 @@
     <div class="pagination">
       <div class="q-pa-lg flex flex-center">
         <q-pagination
+          class="gt-xs"
           v-model="currentPage"
           @click="searchGames()"
           :max="maxPages"
           :max-pages="9"
           direction-links
         />
+          <q-pagination
+            class="xs"
+            v-model="currentPage"
+            @click="searchGames()"
+            :max="maxPages"
+            :max-pages="7"
+            :boundary-numbers="false"
+            :ellipses="true"
+          />
         <pre>{{currentPage}}</pre>
       </div>
     </div>
@@ -226,7 +249,30 @@ export default{
 
 <style scoped>
 .card_wrapper{
-  width: 20%;
+  width: 25%;
+}
+@media screen and (max-width: 1550px) {
+  .card_wrapper{
+    width: 33.33%;
+  }
+}
+@media screen and (max-width: 1240px) {
+  .card_wrapper{
+    width: 50%;
+  }
+}
+@media screen and (max-width: 920px) {
+  .card_wrapper{
+    width: 80%;
+  }
+  .card_container{
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 570px) {
+  .card_wrapper{
+    width: 100%;
+  }
 }
 .card_container {
   width: 100%;
