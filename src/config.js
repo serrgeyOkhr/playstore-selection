@@ -70,5 +70,13 @@ class API_Fabric {
 }
 export default {
   API_URL: 'https://www.cheapshark.com/api/1.0/',
+  API_Section: {
+    List_of_Deals: 'deals?',
+    Deal_Lookup: 'deals?',
+    List_of_Games: 'games?',
+    Game_Lookup: 'games?',
+    Multiple_Game_Lookup: 'games?',
+    Stores_Info: 'stores',
+  },
   API_Fabric
 }

@@ -77,7 +77,7 @@
             :boundary-numbers="false"
             :ellipses="true"
           />
-        <pre>{{currentPage}}</pre>
+        <!-- <pre>{{currentPage}}</pre> -->
       </div>
     </div>
   <q-inner-loading class="preloader" :showing="false" />
