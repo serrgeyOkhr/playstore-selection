@@ -45,7 +45,7 @@
           <q-btn @click="card= true">Show Stores</q-btn>
         </div>
         <div class="flex justify-end">
-          <q-btn :to="{ name: 'gamePage', params: { id: games[0].gameID }}">More...</q-btn>
+          <q-btn :to="{ name: 'gamePage', params: { id: games[0].gameID}}">More...</q-btn>
         </div>
       </q-card-section>
     </q-card>

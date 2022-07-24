@@ -1,6 +1,6 @@
 <template>
   <!-- <div class="q-pa-md"> -->
-    <router-view></router-view>
+    <!-- <router-view></router-view> -->
     <q-layout view="hHh lpr lff" container style="max-height: 100vh; height: 100vh" class="shadow-2">
       <q-header elevated class="bg-black">
         <q-toolbar>
@@ -109,46 +109,6 @@ import HeaderVue from '../components/Header.vue'
 import BodyVue from '../components/Body.vue'
 import { ref } from '@vue/reactivity'
 import config from '../config'
-const menuList = [
-  {
-    icon: 'inbox',
-    label: 'Inbox',
-    separator: true
-  },
-  {
-    icon: 'send',
-    label: 'Outbox',
-    separator: false
-  },
-  {
-    icon: 'delete',
-    label: 'Trash',
-    separator: false
-  },
-  {
-    icon: 'error',
-    label: 'Spam',
-    separator: true
-  },
-  {
-    icon: 'settings',
-    label: 'Settings',
-    separator: false
-  },
-  {
-    icon: 'feedback',
-    label: 'Send Feedback',
-    separator: false
-  },
-  {
-    icon: 'help',
-    iconColor: 'primary',
-    label: 'Help',
-    separator: false
-  }
-]
-
-
 
 export default {
   name: 'store-app',
@@ -163,10 +123,11 @@ export default {
         min: 0,
         max: 50
       },
-      steamRating: 65,
-      metacriticRating: 65,
+      steamRating: 0,
+      metacriticRating: 0,
       sortBy: {label: 'Title', value: 'Title'},
-      showFromShop: []
+      showFromShop: [],
+      title: ''
      })
     const drawer = ref(false)
     const stores = ref([])
@@ -209,7 +170,6 @@ export default {
 
     return {
       drawer,
-      menuList,
       stores,
       isShowShopSelect,
       reRender,
