@@ -2,7 +2,15 @@
   <div class="q-pa-md justify-center stretch q-gutter-md">
     <div class="text-h2 text-center gt-sm"> Выгодные предложения из всех магазинов!</div>
     <div class="text-h3 text-center lt-md"> Выгодные предложения из всех магазинов!</div>
-
+    <div class="search_section">
+      <q-form @submit.prevent="searchGames()">
+        <q-input v-model="searchSettings.title" filled type="search" hint="Search (работает плохо)">
+          <template v-slot:append>
+            <q-btn flat icon="search" @click="searchGames()" />
+          </template>
+        </q-input>
+      </q-form>
+    </div>
     <div class="pagination">
       <div class="q-pa-lg flex flex-center">
         <div>
@@ -113,6 +121,7 @@ export default{
             ]
     const searchSettings = toRef(props, 'passSearchSettings')
     const stores = toRef(props, 'passStores')
+    const searchText = ref('')
     const showGames = ref([])
     const showGroups = ref([])
     const maxPages = ref(0)
@@ -144,7 +153,8 @@ export default{
         metacritic: searchSettings.value.metacriticRating,
         steamRating: searchSettings.value.steamRating,
         sortBy: searchSettings.value.sortBy.value,
-        storeID: (searchSettings.value.showFromShop.length > 0) ? searchSettings.value.showFromShop.toString() : undefined
+        storeID: (searchSettings.value.showFromShop.length > 0) ? searchSettings.value.showFromShop.toString() : undefined,
+        title: searchSettings.value.title,
       }
       const fetch_options = {
         method: 'GET',
@@ -229,7 +239,9 @@ export default{
     //   console.log('showFromShop', showFromShop.value);
     //   console.log('showFromShop toString = ', showFromShop.value.toString());
 
-
+    // function onSubmit() {
+    //   console.log('submit');
+    // }
     // }
 
     return {
@@ -240,7 +252,9 @@ export default{
       searchSettings,
       showGroups,
       sortByOptions,
+      searchText,
       searchGames,
+      // onSubmit,
       // changeValue
     }
   }

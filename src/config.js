@@ -3,7 +3,6 @@ class API_Fabric {
   API_URL = 'https://www.cheapshark.com/api/1.0/'
   setParams(params) {
     console.log(params);
-    // params.storeID    ? this.storeID = params.storeID       : this.storeID = undefined
     this.storeID = params.storeID
     this.pageSize = params.pageSize
     this.pageNumber = params.pageNumber
