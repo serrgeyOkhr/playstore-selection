@@ -16,7 +16,7 @@
         <div>
           <q-pagination
             class="gt-xs"
-            v-model="currentPage"
+            v-model="searchSettings.page"
             @click="searchGames()"
             :max="maxPages"
             :max-pages="9"
@@ -24,7 +24,7 @@
           />
           <q-pagination
             class="xs q-mr-sm"
-            v-model="currentPage"
+            v-model="searchSettings.page"
             @click="searchGames()"
             :max="maxPages"
             :max-pages="5"
@@ -70,7 +70,7 @@
       <div class="q-pa-lg flex flex-center">
         <q-pagination
           class="gt-xs"
-          v-model="currentPage"
+          v-model="searchSettings.page"
           @click="searchGames()"
           :max="maxPages"
           :max-pages="9"
@@ -78,7 +78,7 @@
         />
           <q-pagination
             class="xs"
-            v-model="currentPage"
+            v-model="searchSettings.page"
             @click="searchGames()"
             :max="maxPages"
             :max-pages="7"
@@ -125,7 +125,7 @@ export default{
     const showGames = ref([])
     const showGroups = ref([])
     const maxPages = ref(0)
-    const currentPage = ref(1)
+    // const currentPage = ref(1)
     const API_Section = {
       List_of_Deals: 'deals?',
       Deal_Lookup: 'deals?',
@@ -139,14 +139,15 @@ export default{
     getStores(stores)
 
     function searchGames() {
-      searchWithParams(showGames, maxPages, currentPage)
+      searchWithParams(showGames, maxPages)
     }
 
 
-    function searchWithParams(output, maxPages, page) {
+    function searchWithParams(output, maxPages) {
       const URLFabric = new config.API_Fabric()
+      searchSettings.value.page > maxPages ? searchSettings.value.page = maxPages : null
       const api_params = {
-        pageNumber: page.value,
+        pageNumber: searchSettings.value.page,
         onSale: searchSettings.value.onSale,
         lowerPrice: searchSettings.value.priceRange.min,
         upperPrice: searchSettings.value.priceRange.max,
@@ -161,7 +162,7 @@ export default{
         redirect: 'follow'
       }
       const fetch_url = URLFabric.createURL(API_Section.List_of_Deals, api_params)
-
+      config.setToLocalstorage("searchSettings", searchSettings.value)
       sendOnServerGetPages(fetch_url, fetch_options, output, maxPages)
     }
 
@@ -248,7 +249,7 @@ export default{
       showGames,
       stores,
       maxPages,
-      currentPage,
+      // currentPage,
       searchSettings,
       showGroups,
       sortByOptions,

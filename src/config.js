@@ -67,6 +67,18 @@ class API_Fabric {
   // Methods
 
 }
+
+function setToLocalstorage (fieldTitle, data) {
+  localStorage.setItem(fieldTitle, JSON.stringify(data))
+}
+function getFromLocalstorage (fieldTitle) {
+  const localData = localStorage.getItem(fieldTitle)
+  if(typeof(localData) !== "string") {
+    return false
+  }
+  return JSON.parse(localData)
+}
+
 export default {
   API_URL: 'https://www.cheapshark.com/api/1.0/',
   API_Section: {
@@ -77,5 +89,7 @@ export default {
     Multiple_Game_Lookup: 'games?',
     Stores_Info: 'stores',
   },
-  API_Fabric
+  API_Fabric,
+  setToLocalstorage,
+  getFromLocalstorage
 }

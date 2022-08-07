@@ -1,6 +1,5 @@
 <template>
   <!-- <div class="q-pa-md"> -->
-    <!-- <router-view></router-view> -->
     <q-layout view="hHh lpr lff" container style="max-height: 100vh; height: 100vh" class="shadow-2">
       <q-header elevated class="bg-black">
         <q-toolbar>
@@ -117,7 +116,9 @@ export default {
     BodyVue
   },
   setup () {
-    const searchSettings = ref({
+    const searchSettings = ref({})
+    const localStorageData = config.getFromLocalstorage("searchSettings")
+    searchSettings.value = localStorageData ? localStorageData : ({
       onSale: false,
       priceRange: {
         min: 0,
@@ -127,12 +128,12 @@ export default {
       metacriticRating: 0,
       sortBy: {label: 'Title', value: 'Title'},
       showFromShop: [],
+      page: 1,
       title: ''
      })
     const drawer = ref(false)
     const stores = ref([])
     const isShowShopSelect =ref(false)
-    // const showFromShop = ref([])
     const API_Section = {
       List_of_Deals: 'deals?',
       Deal_Lookup: 'deals?',
@@ -145,9 +146,11 @@ export default {
 
     getStores(stores)
     function searchGames() {
-      console.log(searchSettings);
+      // console.log(searchSettings);
+      config.setToLocalstorage("searchSettings", searchSettings.value)
       reRender.value = Math.random()
     }
+
     function getStores(output) {
       const URLFabric = new config.API_Fabric()
       const fetch_url = URLFabric.createURL(API_Section.Stores_Info)
