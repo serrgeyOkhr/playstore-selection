@@ -149,7 +149,7 @@ export default {
         // },
         mode: 'cors',
       }
-      fetch('http://cors-anywhere.herokuapp.com/'+gameInfoURL, params)
+      fetch(gameInfoURL, params)
           .then(response => {
             console.log(response) 
             return response.json()})
