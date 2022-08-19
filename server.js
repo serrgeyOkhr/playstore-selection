@@ -10,7 +10,7 @@ const server = http.createServer((req, res) => {
     "dist",
     req.url === "/" ? "index.html" : req.url
   );
-
+    // console.log(req.headers.host);
   // Extension of file
   let extname = path.extname(filePath);
 
@@ -35,16 +35,6 @@ const server = http.createServer((req, res) => {
       contentType = "image/jpg";
       break;
   }
-
-  const headers = {
-    'Access-Control-Allow-Origin': request.getHeaders().host, /* @dev First, read about security */
-  };
-  if (req.method === 'OPTIONS') {
-    res.writeHead(204, headers);
-    res.end();
-    return;
-  }
-
 
   // Check if contentType is text/html but no .html file extension
   if (contentType == "text/html" && extname == "") filePath += ".html";
