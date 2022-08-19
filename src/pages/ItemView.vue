@@ -144,7 +144,7 @@ export default {
       const params ={
         method: 'GET',
         // headers: {
-          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Origin': 'https://calm-refuge-07361.herokuapp.com',
           // 'Content-Type':	'application/json;',
         // },
         mode: 'cors',
