@@ -144,8 +144,8 @@ export default {
       const params ={
         method: 'GET',
         // headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:3000',
-          'Content-Type':	'application/json;',
+          'Access-Control-Allow-Origin': '*',
+          // 'Content-Type':	'application/json;',
         // },
         mode: 'cors',
       }
