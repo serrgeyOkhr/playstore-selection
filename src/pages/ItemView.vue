@@ -29,10 +29,11 @@
                   </q-carousel>
                 </div>
               </div>
-              <div class="historical_block">
-                <span class="text-h4">Lowest price</span>
-                <span class="text-body1"> {{gameInfo?.cheapestPriceEver}} </span>
-              </div>
+              <!-- <div class="historical_block">
+                <p class="text-h5">Lowest price ever:</p>
+                <span class="text-body1"> {{gameInfo?.cheapestPriceEver.price}} </span>
+                <span class="text-body1"> {{gameInfo?.cheapestPriceEver.date}} </span>
+              </div> -->
             </div>
             <div class="gameInfo flex">
               <div class="q-mb-md">
@@ -40,6 +41,8 @@
               </div>
               <div>
                 <span class="text-body1"> {{steamInfo?.short_description}} </span>
+                <p class="text-h5">Lowest price ever: {{gameInfo?.cheapestPriceEver.price}} $</p>
+                <span class="text-body1">  </span>
               </div>
               <div class="price_place q-mt-md">
                 <span class="text-h5"> Список всех магазинов: </span>
@@ -96,7 +99,7 @@
           <!-- <q-img :src="steamInfo?.background"></q-img> -->
         </div>
           <!-- <pre>{{steamInfo}}</pre> -->
-          <pre>{{gameInfo}}</pre>
+          <!-- <pre>{{gameInfo}}</pre> -->
           <!-- <pre>{{stores}}</pre> -->
       </q-page>
     </q-page-container>
