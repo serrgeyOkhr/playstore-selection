@@ -143,10 +143,10 @@ export default {
       // console.log(gameInfoURL);
       const params ={
         method: 'GET',
-        // headers: {
+        headers: {
           'Access-Control-Allow-Origin': 'https://calm-refuge-07361.herokuapp.com',
           // 'Content-Type':	'application/json;',
-        // },
+        },
         mode: 'cors',
       }
       fetch(gameInfoURL, params)
