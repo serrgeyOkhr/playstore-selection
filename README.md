@@ -1,29 +1,18 @@
-# cinema-project
+## Поисковик скидок на игры
 
-This template should help get you started developing with Vue 3 in Vite.
+Проект представляет собой интерфейс для двух API.
+Вся выборка игр, поиск, фильтрация по параметрам происходит с помощью API [Cheapshark](https://apidocs.cheapshark.com/)
+Данные о конкретной игре получаю через [Steam](https://store.steampowered.com)
 
-## Recommended IDE Setup
+## Демо
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+[Посмотреть проект](https://cinema-app-07361.herokuapp.com/)
 
-## Customize configuration
+## Стек технологий
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+Язык: JavaScript 
+Фреймворк: Vue 3
+Библиотека компонентов: [Quasar](quasar.dev/)
+Бэкенд для работы Steam API: Node.JS + express
+Бэкенд для хостинга приложения: Node.JS
+Хост: [Heroku](heroku.com)
